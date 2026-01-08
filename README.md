@@ -46,23 +46,64 @@ The project is divided into the following major components:
 
 ---
 
-## 3. Technologies Used
+## 3. Repository Structure
 
-- **Python 3.x** – ETL implementation and data processing  
-- **Pandas** – Data cleaning and transformation  
-- **MySQL** – Relational database implementation  
-- **MongoDB** – NoSQL data storage and analysis  
-- **SQL** – Querying and analytical reporting  
+```text
+├── part1-database-etl/
+│   ├── etl_pipeline.py
+│   ├── schema_documentation.md
+│   ├── business_queries.sql
+│   └── data_quality_report.txt
+├── part2-nosql/
+│   ├── nosql_analysis.md
+│   ├── mongodb_operations.js
+│   └── products_catalog.json
+├── part3-datawarehouse/
+│   ├── star_schema_design.md
+│   ├── warehouse_schema.sql
+│   ├── warehouse_data.sql
+│   └── analytics_queries.sql
+└── README.md
+```
 
----
+## 4. Technologies Used
 
-## 4. Setup Instructions
+- Python 3.x, pandas, mysql-connector-python
+- MySQL 8.0 / PostgreSQL 14
+- MongoDB 6.0
+
+## 5. Setup Instructions
 
 All setup steps and execution instructions have been followed **exactly as provided in the assignment document**, without modification, to ensure consistency with evaluation requirements.
 
+
+### Database Setup
+
+```bash
+# Create databases
+mysql -u root -p -e "CREATE DATABASE fleximart;"
+mysql -u root -p -e "CREATE DATABASE fleximart_dw;"
+
+# Run Part 1 - ETL Pipeline
+python part1-database-etl/etl_pipeline.py
+
+# Run Part 1 - Business Queries
+mysql -u root -p fleximart < part1-database-etl/business_queries.sql
+
+# Run Part 3 - Data Warehouse
+mysql -u root -p fleximart_dw < part3-datawarehouse/warehouse_schema.sql
+mysql -u root -p fleximart_dw < part3-datawarehouse/warehouse_data.sql
+mysql -u root -p fleximart_dw < part3-datawarehouse/analytics_queries.sql
+
+
+### MongoDB Setup
+
+mongosh < part2-nosql/mongodb_operations.js
+```
+
 ---
 
-## 5. Key Learnings
+## 6. Key Learnings
 
 - Designing **ETL pipelines** to handle inconsistent and incomplete source data  
 - Applying **database normalization principles** for relational schema design  
@@ -72,7 +113,7 @@ All setup steps and execution instructions have been followed **exactly as provi
 
 ---
 
-## 6. Challenges Faced and Resolution
+## 7. Challenges Faced and Resolution
 
 ### Challenge 1: Inconsistent Source Data Formats
 - **Issue:** Variations in data types and missing values across datasets  
@@ -84,6 +125,6 @@ All setup steps and execution instructions have been followed **exactly as provi
 
 ---
 
-## 7. Conclusion
+## 8. Conclusion
 
 This project demonstrates the implementation of a **complete data architecture pipeline**, integrating ETL processing, relational databases, NoSQL systems, and data warehousing concepts. The solution aligns with course objectives and supports both operational and analytical use cases.
